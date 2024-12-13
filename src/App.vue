@@ -1,30 +1,30 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <div class="book-grid">
+  <BookTile :title="'Carrie - 1'"/>
+  <BookTile :title="'Pet Sematary - 2'"/>
+  <BookTile :title="'It - 3'"/>
+  <BookTile :title="'The Shining - 4'"/>
+  <BookTile :title="'The Stand - 5'"/>
+  <BookTile :title="'Outsider - 6'"/>
+  <BookTile :title="'Misery - 7'"/>
+  <BookTile :title="'The Night Shift - 8'"/>
+  <BookTile :title="'Rose Madder - 9'"/>
+  <BookTile :title="'Hearts in Atlantis - 10'"/>
+</div>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script>
+import BookTile from './components/BookTile.vue'
+export default {
+  components: {
+  BookTile
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+</script>
+<style>
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 10px;
+    gap: 20px;
 }
 </style>

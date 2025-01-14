@@ -1,30 +1,57 @@
 <template>
   <div class="book-grid">
-  <BookTile :title="'Carrie - 1'"/>
-  <BookTile :title="'Pet Sematary - 2'"/>
-  <BookTile :title="'It - 3'"/>
-  <BookTile :title="'The Shining - 4'"/>
-  <BookTile :title="'The Stand - 5'"/>
-  <BookTile :title="'Outsider - 6'"/>
-  <BookTile :title="'Misery - 7'"/>
-  <BookTile :title="'The Night Shift - 8'"/>
-  <BookTile :title="'Rose Madder - 9'"/>
-  <BookTile :title="'Hearts in Atlantis - 10'"/>
-</div>
+    <BookTile v-for="result in results" :bookid="result.id" :bookyear="result.year" :bookname="result.name" :bookvillains="result.villains"/>
+  </div>
 </template>
+
 <script>
-import BookTile from './components/BookTile.vue'
+import BookTile from './components/BookTile.vue';
+import axios from 'axios';
+
 export default {
   components: {
   BookTile
-}
+},
+data() {
+    return {
+      results: [],
+      isLoading: false,
+      error: null
+    }
+  },
+methods: {
+    loadExps() {
+    this.isLoading = true;
+
+  axios.get('https://stephen-king-api.onrender.com/api/books')
+  .then((response) => {
+    this.isLoading = false;
+    // handle success
+    console.log('king', response);
+    const results = [];
+    for (const id in response.data.data){
+      results.push({id: id, name: response.data.data[id].Title, year: response.data.data[id].Year, villains: [response.data.data[id].villains]})
+    }
+    this.results = results;
+  })
+  .catch((error) => {
+    // handle error
+    console.log(error);
+    this.isLoading = false;
+    this.error = 'failed to fetch data, pls try again';
+  })
+ 
+    }
+  },
+  mounted(){
+    this.loadExps();
+  }
 }
 </script>
 <style>
 .book-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-auto-rows: 10px;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 </style>

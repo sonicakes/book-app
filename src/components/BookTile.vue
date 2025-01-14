@@ -1,6 +1,13 @@
 <template>
   <div class="scary">
-    <h1>{{ title }}</h1>
+    <h1>{{ bookname }}</h1>
+    <h3>{{ bookyear }}</h3>
+    <h4 v-if="bookvillains[0].length!=0">Villains:</h4>
+      <ul v-if="bookvillains[0].length!=0" v-for="villain in bookvillains">
+        <li v-for="v in villain"> 
+          {{ v.name }}
+        </li> 
+      </ul>
   </div>
 </template>
 
@@ -8,12 +15,16 @@
 export default {
   data() {
     return {
-      
+      villains: []
     }
   },
   props: {
-    title: String,
-  }
+    bookname: String,
+    bookname: String,
+    bookyear: String,
+    bookvillains: Array
+  },
+
 }
 
 
@@ -34,25 +45,11 @@ h1 {
   border-style: solid;
   padding: 5px;
   box-sizing: border-box;
+  min-height: 500px;
 }
 
 .scary:hover {
     transform: translateY(-10px);
 }
 
-.scary:first-child, .scary:nth-child(6) {
-  grid-row: span 15;
-}
-.scary:nth-child(2), .scary:nth-child(7) {
-  grid-row: span 20;
-}
-.scary:nth-child(3), .scary:nth-child(8) {
-  grid-row: span 10;
-}
-.scary:nth-child(4), .scary:nth-child(9) {
-  grid-row: span 25;
-}
-.scary:nth-child(5), .scary:nth-child(10) {
-  grid-row: span 30;
-}
 </style>

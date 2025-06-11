@@ -73,7 +73,7 @@ export default {
 
       axios
         .get(
-          "https://pixabay.com/api/?key=4831069-76ad59aa74f728f8330d16406&q=" +
+          "https://pixabay.com/api/?key=" + import.meta.env.VITE_API_KEY + "&q=" +
             searchTerm +
             "&image_type=photo"
         )

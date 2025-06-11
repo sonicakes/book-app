@@ -8,6 +8,7 @@
           {{ v.name }}
         </li> 
       </ul>
+      <img :src="img"/>
   </div>
 </template>
 
@@ -22,7 +23,8 @@ export default {
     bookname: String,
     bookname: String,
     bookyear: String,
-    bookvillains: Array
+    bookvillains: Array,
+    img: String
   },
 
 }

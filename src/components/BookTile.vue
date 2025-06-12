@@ -1,14 +1,17 @@
 <template>
-  <div class="scary">
-    <h1>{{ bookname }}</h1>
-    <h3>{{ bookyear }}</h3>
-    <h4 v-if="bookvillains[0].length!=0">Villains:</h4>
+  <div :class="assignClass">
+  <div class="overlay"></div>
+    <!-- <h4 v-if="bookvillains[0].length!=0">Villains:</h4>
       <ul v-if="bookvillains[0].length!=0" v-for="villain in bookvillains">
         <li v-for="v in villain"> 
           {{ v.name }}
         </li> 
-      </ul>
-      <img :src="img"/>
+      </ul> -->
+    <img :src="img" />
+    <div class="book-header">
+      <h1>{{ bookname }}</h1>
+      <h3>{{ bookyear }}</h3>
+    </div>
   </div>
 </template>
 
@@ -24,9 +27,22 @@ export default {
     bookname: String,
     bookyear: String,
     bookvillains: Array,
-    img: String
+    img: String,
+    childNo: Number
   },
-
+  computed : {
+    assignClass(){
+      if (this.childNo % 2 === 0){
+        return 'big';
+      }else if (this.childNo % 3 === 0){
+        return 'tall'
+      }else if (this.childNo % 4 === 0){
+        return 'wide';
+      }else {
+        return '';
+      }
+    }
+  }
 }
 
 
@@ -37,21 +53,21 @@ export default {
 h1 {
   font-family: Bloody;
   color: 	#880808;
-  font-size: 56px;
-  letter-spacing: 1.2px;
+  font-size: 36px;
+  letter-spacing: 2.2px;
+  background: rgba(0, 0, 0, 0.8);
 }
-.scary {
-  border-image: linear-gradient(to right, #880808 0%, #C0C0C0 100%) 1;
-  border-radius: 5px; /* this doesn't work */
-  border-width: 2px;
-  border-style: solid;
-  padding: 5px;
-  box-sizing: border-box;
-  min-height: 500px;
+.book-header{
+  position: absolute;
 }
 
-.scary:hover {
-    transform: translateY(-10px);
+.overlay{
+    /* background: black; */
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    /* opacity: 70%; */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5));
 }
 
 </style>
